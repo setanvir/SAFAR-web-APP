@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" width="100%" height="100%">
+  <!-- Background Glow & Crescent -->
+  <defs>
+    <linearGradient id="safarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FB923C" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+    <filter id="subtleShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#EA580C" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#subtleShadow)">
+    <!-- Crescent Moon Arc -->
+    <path 
+      d="M38 6C23.64 6 12 17.64 12 32c0 14.36 11.64 26 26 26 4.3 0 8.35-1.05 11.9-2.9-10.8-1.5-19.9-9.5-22.1-20.1C25.3 23.1 30.5 12.8 39.5 8.2 39 8.1 38.5 6 38 6z" 
+      fill="url(#safarGrad)" 
+    />
+    
+    <!-- Pin Location Marker -->
+    <path 
+      d="M38 14c-7.73 0-14 6.27-14 14 0 9.8 11.9 21.3 12.8 22.1.66.63 1.74.63 2.4 0 .9-.8 12.8-12.3 12.8-22.1 0-7.73-6.27-14-14-14z" 
+      fill="url(#safarGrad)" 
+    />
+    
+    <!-- Inner White Circle for Contrast -->
+    <circle cx="38" cy="27" r="9.5" fill="#FFFFFF" />
+    
+    <!-- Airplane Silhouette inside Pin -->
+    <path 
+      d="M42.8 23.2l-1.2-1.2c-.39-.39-1.02-.39-1.41 0l-3.3 3.3-6.1-2.2c-.44-.16-.94-.02-1.23.35-.35.44-.27 1.08.18 1.42l4.5 3.5-2.2 2.2-1.8-.6c-.34-.11-.71-.02-.97.24l-.6.6 2.6 1.8 1.8 2.6.6-.6c.26-.26.35-.63.24-.97l-.6-1.8 2.2-2.2 3.5 4.5c.34.45.98.53 1.42.18.37-.29.51-.79.35-1.23l-2.2-6.1 3.3-3.3c.39-.39.39-1.02 0-1.41z" 
+      fill="#EA580C" 
+    />
+  </g>
+</svg>

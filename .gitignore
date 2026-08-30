@@ -1,18 +1,33 @@
-# Environment
+# Environment & Secrets
 .env
+*.env
 .htaccess
 
-# OS files
+# Dependencies
+node_modules/
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Build outputs & caches
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+*.zip
+
+# System & IDE files
 .DS_Store
 Thumbs.db
 desktop.ini
-
-# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Temp files
+# Database & Logs
 *.tmp
 *.log

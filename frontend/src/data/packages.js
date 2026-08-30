@@ -1,0 +1,335 @@
+export const ALL_PACKAGES = [
+  // ── 20 Tours ──
+  {
+    id: 1,
+    type: "tour",
+    title: "Maldives Tropical Retreat",
+    location: "Maldives",
+    price: 1499.00,
+    description: "Experience the ultimate relaxation with our 7-day tropical paradise package. Crystal clear waters and pristine beaches await you. Includes luxury water villa stay and guided snorkeling.",
+    image_url: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=70",
+    duration_days: 7,
+    agency: "Oceanic Adventures"
+  },
+  {
+    id: 2,
+    type: "tour",
+    title: "Bali Sunrise & Waves",
+    location: "Bali, Indonesia",
+    price: 899.00,
+    description: "Discover the serene beaches and rich culture of Bali. Surf the best waves and relax in luxury resorts. Visit sacred temples and lush rice terraces.",
+    image_url: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=70",
+    duration_days: 5,
+    agency: "Oceanic Adventures"
+  },
+  {
+    id: 3,
+    type: "tour",
+    title: "Caribbean Island Hop",
+    location: "Bahamas",
+    price: 2100.00,
+    description: "A wonderful 10-day island hopping experience across the beautiful Caribbean islands. Catamaran sailing, snorkeling with sea turtles, and private island dinners.",
+    image_url: "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=70",
+    duration_days: 10,
+    agency: "Oceanic Adventures"
+  },
+  {
+    id: 4,
+    type: "tour",
+    title: "Himalayan Base Camp Trek",
+    location: "Nepal",
+    price: 2100.00,
+    description: "Challenge yourself with a 14-day guided trek to the base of the worlds highest peak. An unforgettable journey across sherpa villages and mountain passes.",
+    image_url: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=70",
+    duration_days: 14,
+    agency: "Mountain Treks"
+  },
+  {
+    id: 5,
+    type: "tour",
+    title: "Swiss Alps Adventure",
+    location: "Zermatt, Switzerland",
+    price: 3200.00,
+    description: "A premium adventure package exploring the majestic Swiss Alps. Perfect for hiking enthusiasts and nature lovers. Enjoy scenic train rides and glacier walks.",
+    image_url: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&q=70",
+    duration_days: 8,
+    agency: "Mountain Treks"
+  },
+  {
+    id: 6,
+    type: "tour",
+    title: "Patagonia Wilderness",
+    location: "Argentina",
+    price: 2800.00,
+    description: "Explore the dramatic landscapes, glaciers, and towering granite peaks of Patagonia on this 12-day eco-expedition with seasoned mountaineers.",
+    image_url: "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?w=800&q=70",
+    duration_days: 12,
+    agency: "Mountain Treks"
+  },
+  {
+    id: 7,
+    type: "tour",
+    title: "Tokyo City Explorer",
+    location: "Tokyo, Japan",
+    price: 1800.00,
+    description: "Immerse yourself in the bustling streets, rich history, and modern marvels of Tokyo. Savor Michelin street food and visit ancient shrines.",
+    image_url: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=70",
+    duration_days: 6,
+    agency: "City Escapes"
+  },
+  {
+    id: 8,
+    type: "tour",
+    title: "New York Weekend Escapade",
+    location: "New York, USA",
+    price: 1200.00,
+    description: "A fast-paced weekend exploring the city that never sleeps. Visit Times Square, Central Park, Broadway musicals, and skyline observatories.",
+    image_url: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&q=70",
+    duration_days: 4,
+    agency: "City Escapes"
+  },
+  {
+    id: 9,
+    type: "tour",
+    title: "Dubai Luxury Tour",
+    location: "Dubai, UAE",
+    price: 2500.00,
+    description: "Experience luxury at its finest with our exclusive 5-day Dubai city tour. Luxury yacht cruise, desert safari, and skyline dining.",
+    image_url: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=70",
+    duration_days: 5,
+    agency: "City Escapes"
+  },
+  {
+    id: 10,
+    type: "tour",
+    title: "Sahara Desert Expedition",
+    location: "Merzouga, Morocco",
+    price: 1350.00,
+    description: "A mesmerizing 5-day journey through the golden dunes of the Sahara. Includes camel rides, Berber music, and glamping under the Milky Way.",
+    image_url: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=70",
+    duration_days: 5,
+    agency: "Desert Safari Co"
+  },
+  {
+    id: 11,
+    type: "tour",
+    title: "Atacama Stargazing",
+    location: "San Pedro de Atacama, Chile",
+    price: 1900.00,
+    description: "Discover the driest non-polar desert in the world and experience unparalleled stargazing through high-powered astronomical telescopes.",
+    image_url: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=70",
+    duration_days: 6,
+    agency: "Desert Safari Co"
+  },
+  {
+    id: 12,
+    type: "tour",
+    title: "Amazon Rainforest Safari",
+    location: "Manaus, Brazil",
+    price: 2200.00,
+    description: "Deep dive into the lungs of the Earth. A guided 8-day eco-tour through the Amazon rainforest with canopy walks and river dolphin sightings.",
+    image_url: "https://images.unsplash.com/photo-1516214104703-d870798883c5?w=800&q=70",
+    duration_days: 8,
+    agency: "Forest Explorers"
+  },
+  {
+    id: 13,
+    type: "tour",
+    title: "Yosemite Nature Walk",
+    location: "California, USA",
+    price: 950.00,
+    description: "A peaceful 4-day retreat exploring the towering sequoias, waterfalls, and beautiful granite valleys of Yosemite National Park.",
+    image_url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&q=70",
+    duration_days: 4,
+    agency: "Forest Explorers"
+  },
+  {
+    id: 14,
+    type: "tour",
+    title: "Rome Historical Immersion",
+    location: "Rome, Italy",
+    price: 1600.00,
+    description: "Walk through history with our 6-day guided tour of Romes most famous ancient ruins, the Colosseum, the Vatican, and authentic culinary classes.",
+    image_url: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=70",
+    duration_days: 6,
+    agency: "Historical Tours"
+  },
+  {
+    id: 15,
+    type: "tour",
+    title: "Machu Picchu Discovery",
+    location: "Cusco, Peru",
+    price: 2400.00,
+    description: "Uncover the mysteries of the Incas with this exclusive 7-day trek and tour of Machu Picchu, the Sacred Valley, and historic Cusco.",
+    image_url: "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=800&q=70",
+    duration_days: 7,
+    agency: "Historical Tours"
+  },
+  {
+    id: 16,
+    type: "tour",
+    title: "Kyoto Historical Tour",
+    location: "Kyoto, Japan",
+    price: 950.00,
+    description: "Immerse yourself in ancient traditions, stunning temples, serene bamboo groves, and beautiful cherry blossom gardens in Kyoto.",
+    image_url: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=70",
+    duration_days: 5,
+    agency: "Historical Tours"
+  },
+  {
+    id: 17,
+    type: "tour",
+    title: "Santorini Island Hopping",
+    location: "Santorini, Greece",
+    price: 1400.00,
+    description: "Cruise the Aegean Sea and witness the most beautiful cliffside sunsets in the world. Enjoy Greek wine tastings and private caldera catamaran cruises.",
+    image_url: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=70",
+    duration_days: 6,
+    agency: "Oceanic Adventures"
+  },
+  {
+    id: 18,
+    type: "tour",
+    title: "Northern Lights Safari",
+    location: "Tromsø, Norway",
+    price: 1600.00,
+    description: "Chase the magical Aurora Borealis across the snowy Arctic landscapes with dog sledding, fjord cruises, and heated glass igloo stays.",
+    image_url: "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=800&q=70",
+    duration_days: 6,
+    agency: "Mountain Treks"
+  },
+  {
+    id: 19,
+    type: "tour",
+    title: "Grand Canyon Rafting",
+    location: "Arizona, USA",
+    price: 750.00,
+    description: "An exhilarating white-water rafting experience through the iconic canyon with campfire cookouts and scenic hiking trails.",
+    image_url: "https://images.unsplash.com/photo-1615551043360-33de8b5f410c?w=800&q=70",
+    duration_days: 3,
+    agency: "City Escapes"
+  },
+  {
+    id: 20,
+    type: "tour",
+    title: "Taj Mahal & Golden Triangle",
+    location: "Agra & Jaipur, India",
+    price: 680.00,
+    description: "A majestic tour of Indias most iconic cultural and historical landmarks, royal palaces of Rajasthan, and the world wonder Taj Mahal.",
+    image_url: "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=70",
+    duration_days: 5,
+    agency: "Historical Tours"
+  },
+
+  // ── 10 Luxury Hotels ──
+  {
+    id: 21,
+    type: "hotel",
+    title: "The Plaza Hotel",
+    location: "New York City, USA",
+    price: 450.00,
+    description: "Luxury 5-star hotel offering iconic views of Central Park, classic Edwardian architecture, and world-class butler service.",
+    image_url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=70",
+    room_type: "Park View Suite",
+    amenities: "Central Park View, Guerlain Spa, Afternoon Tea, Valet"
+  },
+  {
+    id: 22,
+    type: "hotel",
+    title: "Burj Al Arab",
+    location: "Dubai, UAE",
+    price: 1200.00,
+    description: "Experience unparalleled luxury in the worlds only 7-star hotel structure with private butler service, 24k gold interior, and helicopter transfers.",
+    image_url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=70",
+    room_type: "Deluxe Marina Suite",
+    amenities: "Private Beach, 9 Signature Restaurants, Helipad, Talise Spa"
+  },
+  {
+    id: 23,
+    type: "hotel",
+    title: "Marina Bay Sands",
+    location: "Singapore",
+    price: 600.00,
+    description: "Iconic integrated resort featuring the worlds largest rooftop Infinity Pool, panoramic sky decks, and high-end luxury shopping.",
+    image_url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=70",
+    room_type: "Sky View Suite",
+    amenities: "Infinity Pool, SkyPark Observation Deck, Banyan Tree Spa, Casino"
+  },
+  {
+    id: 24,
+    type: "hotel",
+    title: "Ritz Paris",
+    location: "Paris, France",
+    price: 850.00,
+    description: "Classic elegance and sophisticated Parisian charm in the heart of Place Vendome. Legendary cocktail bars and private French gardens.",
+    image_url: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=70",
+    room_type: "Prestige Parisian Suite",
+    amenities: "Chanel Spa, Bar Hemingway, Private Garden, Indoor Pool"
+  },
+  {
+    id: 25,
+    type: "hotel",
+    title: "Atlantis The Palm",
+    location: "Dubai, UAE",
+    price: 550.00,
+    description: "Ocean-themed destination resort offering thrilling Aquaventure waterparks, the Lost Chambers marine habitat, and celebrity dining.",
+    image_url: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800&q=70",
+    room_type: "Ocean King Room",
+    amenities: "Waterpark Access, Underwater Aquarium, Dolphin Bay, Nobu Dining"
+  },
+  {
+    id: 26,
+    type: "hotel",
+    title: "Aman Tokyo",
+    location: "Tokyo, Japan",
+    price: 900.00,
+    description: "A serene sanctuary high above the vibrant Otemachi district, blending traditional washi paper screens, onsen baths, and minimalist design.",
+    image_url: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=70",
+    room_type: "Premier Onsen Room",
+    amenities: "Traditional Japanese Spa, 30m Sky Pool, Fumoir Cigar Lounge"
+  },
+  {
+    id: 27,
+    type: "hotel",
+    title: "The Savoy",
+    location: "London, UK",
+    price: 500.00,
+    description: "Historic luxury hotel on the North Bank of the River Thames, redefining British elegance and hospitality for over a century.",
+    image_url: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&q=70",
+    room_type: "Edwardian River Suite",
+    amenities: "Thames View, American Bar, Savoy Grill by Gordon Ramsay"
+  },
+  {
+    id: 28,
+    type: "hotel",
+    title: "Four Seasons Bora Bora",
+    location: "Bora Bora, French Polynesia",
+    price: 1500.00,
+    description: "Overwater bungalows on turquoise lagoons with magnificent Mount Otemanu views. Sunset Polynesian sailing and romantic beach dinners.",
+    image_url: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=70",
+    room_type: "Overwater Bungalow with Plunge Pool",
+    amenities: "Private Lagoon, Overwater Spa, Coral Reef Snorkeling, Catamaran"
+  },
+  {
+    id: 29,
+    type: "hotel",
+    title: "Waldorf Astoria",
+    location: "Maldives",
+    price: 1800.00,
+    description: "Exclusive private island luxury surrounded by sapphire ocean waters. Features 11 dining venues including Terra treetop dining.",
+    image_url: "https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?w=800&q=70",
+    room_type: "Grand Reef Villa",
+    amenities: "Private Infinity Pool, Yacht Transfers, Overwater Spa, Treetop Dining"
+  },
+  {
+    id: 30,
+    type: "hotel",
+    title: "Amangiri Resort",
+    location: "Utah, USA",
+    price: 2000.00,
+    description: "A remote architectural masterpiece seamlessly integrated into 600 acres of dramatic canyon landscape near Lake Powell.",
+    image_url: "https://images.unsplash.com/photo-1517840901100-8179e982acb7?w=800&q=70",
+    room_type: "Desert View Pool Suite",
+    amenities: "Canyon Pool, Private Helicopter Tours, Navajo Wellness Rituals"
+  }
+]

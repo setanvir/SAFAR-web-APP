@@ -1,0 +1,17 @@
+{
+  "name": "safar-api-gateway",
+  "version": "2.0.0",
+  "description": "Node.js Express API Gateway for SAFAR Travel Marketplace",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "http-proxy-middleware": "^3.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0"
+  }
+}

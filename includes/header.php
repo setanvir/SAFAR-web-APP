@@ -17,13 +17,13 @@ if (session_status() === PHP_SESSION_NONE) {
 <body>
     <nav class="navbar glass" id="main-nav">
         <div class="container nav-container">
-            <a href="<?php echo BASE_URL; ?>/" class="brand" style="display: flex; align-items: center;">
+            <a href="<?php echo BASE_URL; ?>/pages/index.php" class="brand" style="display: flex; align-items: center;">
                 <img src="<?php echo BASE_URL; ?>/assets/images/logo.png" alt="SAFAR Logo" style="height: 100px; width: auto; transition: transform 0.3s ease;">
             </a>
             <ul class="nav-links">
-                <li><a href="<?php echo BASE_URL; ?>/explore.php">Explore</a></li>
-                <li><a href="<?php echo BASE_URL; ?>/explore.php?type=tour">Tours</a></li>
-                <li><a href="<?php echo BASE_URL; ?>/explore.php?type=hotel">Hotels</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/pages/explore.php">Explore</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/pages/explore.php?type=tour">Tours</a></li>
+                <li><a href="<?php echo BASE_URL; ?>/pages/explore.php?type=hotel">Hotels</a></li>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <?php if ($_SESSION['user_role'] === 'traveler'): ?>
                         <li><a href="<?php echo BASE_URL; ?>/dashboard/traveler.php">My Bookings</a></li>
@@ -32,11 +32,11 @@ if (session_status() === PHP_SESSION_NONE) {
                     <?php elseif ($_SESSION['user_role'] === 'admin'): ?>
                         <li><a href="<?php echo BASE_URL; ?>/admin/index.php">Admin Panel</a></li>
                     <?php endif; ?>
-                    <li><a href="<?php echo BASE_URL; ?>/profile.php" class="nav-btn">Profile</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/logout.php" class="nav-btn btn-outline-nav">Logout</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/pages/profile.php" class="nav-btn">Profile</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/pages/logout.php" class="nav-btn btn-outline-nav">Logout</a></li>
                 <?php else: ?>
-                    <li><a href="<?php echo BASE_URL; ?>/login.php" class="nav-btn btn-outline-nav">Log In</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/signup.php" class="nav-btn btn-gradient-nav">Sign Up</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/pages/login.php" class="nav-btn btn-outline-nav">Log In</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/pages/signup.php" class="nav-btn btn-gradient-nav">Sign Up</a></li>
                 <?php endif; ?>
             </ul>
             <div class="hamburger">

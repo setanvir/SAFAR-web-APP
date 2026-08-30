@@ -75,7 +75,7 @@ require_once '../includes/header.php';
             </li>
             <?php endif; ?>
             <li>
-                <a href="../profile.php" style="display: block; padding: 10px; border-radius: 8px; color: var(--text-main); transition: var(--transition);"><i class="fas fa-user-edit"></i> Agency Profile</a>
+                <a href="../pages/profile.php" style="display: block; padding: 10px; border-radius: 8px; color: var(--text-main); transition: var(--transition);"><i class="fas fa-user-edit"></i> Agency Profile</a>
             </li>
         </ul>
     </aside>

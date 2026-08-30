@@ -49,10 +49,10 @@ require_once '../includes/header.php';
                 <a href="traveler.php" style="display: block; padding: 10px; border-radius: 8px; background: var(--bg-light); color: var(--primary); font-weight: 600;"><i class="fas fa-home"></i> Dashboard</a>
             </li>
             <li style="margin-bottom: 10px;">
-                <a href="../explore.php" style="display: block; padding: 10px; border-radius: 8px; color: var(--text-main); transition: var(--transition);"><i class="fas fa-search"></i> Explore Tours</a>
+                <a href="../pages/explore.php" style="display: block; padding: 10px; border-radius: 8px; color: var(--text-main); transition: var(--transition);"><i class="fas fa-search"></i> Explore Tours</a>
             </li>
             <li>
-                <a href="../profile.php" style="display: block; padding: 10px; border-radius: 8px; color: var(--text-main); transition: var(--transition);"><i class="fas fa-user"></i> Update Profile</a>
+                <a href="../pages/profile.php" style="display: block; padding: 10px; border-radius: 8px; color: var(--text-main); transition: var(--transition);"><i class="fas fa-user"></i> Update Profile</a>
             </li>
         </ul>
     </aside>
@@ -113,7 +113,7 @@ require_once '../includes/header.php';
                     </table>
                 </div>
             <?php else: ?>
-                <p style="color: var(--text-muted);">No bookings found matching your criteria. <a href="../explore.php" style="color: var(--primary);">Explore packages</a></p>
+                <p style="color: var(--text-muted);">No bookings found matching your criteria. <a href="../pages/explore.php" style="color: var(--primary);">Explore packages</a></p>
             <?php endif; ?>
         </div>
     </div>

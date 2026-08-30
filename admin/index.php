@@ -73,7 +73,7 @@ require_once '../includes/header.php';
                 <a href="manage-package.php?type=hotel" style="display: block; padding: 10px; border-radius: 8px; color: var(--text-main); transition: var(--transition);"><i class="fas fa-hotel"></i> Create Hotel</a>
             </li>
             <li>
-                <a href="../profile.php" style="display: block; padding: 10px; border-radius: 8px; color: var(--text-main); transition: var(--transition);"><i class="fas fa-user-shield"></i> Admin Profile</a>
+                <a href="../pages/profile.php" style="display: block; padding: 10px; border-radius: 8px; color: var(--text-main); transition: var(--transition);"><i class="fas fa-user-shield"></i> Admin Profile</a>
             </li>
         </ul>
     </aside>

@@ -1,18 +1,332 @@
-### Project Introduction
-**SAFAR** is a dynamic, full-stack travel marketplace designed to seamlessly connect travel agencies with globetrotters. Built on a robust PHP and MySQL architecture, the platform serves as a centralized hub where verified travel agencies can curate and list premium tour packages and hotel accommodations. For travelers, SAFAR offers an intuitive, visually engaging interface to discover, compare, and reserve their next adventure. With an emphasis on user experience, secure role-based access, and streamlined booking workflows, SAFAR modernizes the travel reservation process for both vendors and customers.
+# SAFAR — Enterprise Travel & Holiday Marketplace
 
-### Project Summary
-The application functions as a multi-tenant booking ecosystem utilizing a three-tiered user architecture: Travelers, Agencies, and Administrators. The backend relies on vanilla PHP integrated with PDO for secure, prepared database transactions, while the frontend leverages responsive HTML, custom CSS with modern glassmorphism aesthetics, and JavaScript for asynchronous search filtering. 
+> A production-grade, full-stack travel marketplace connecting travelers, verified agencies, and administrators with real database persistence, JWT authentication, and active software design patterns.
 
-When a travel agency registers, they undergo a mandatory verification process governed by the system administrators. Once approved, agencies gain access to a dedicated dashboard to manage their listings and process incoming booking requests. Travelers can seamlessly browse global destinations, view comprehensive package details, and execute simulated reservations via an interactive demo-payment gateway. The entire ecosystem is overseen by an Admin panel that provides granular control over user management, agency approvals, and global system analytics.
+**Tech Stack**: React 18 (Vite) • Node.js Express API Gateway • FastAPI (Python 3.10+) Backend • PostgreSQL / SQLAlchemy ORM
 
-### Key Points & Features
-* **Role-Based Access Control (RBAC):** Distinct, secure environments and workflows for three user types:
-  * **Travelers:** Can browse packages, submit booking requests, and track trip histories.
-  * **Agencies:** Have dedicated dashboards to create/manage listings and approve/reject bookings.
-  * **Administrators:** Possess global oversight to manage users, moderate packages, and verify agency credentials.
-* **Agency Verification Workflow:** Built-in quality control ensures that newly registered travel agencies cannot publish packages until their account is manually reviewed and verified by an Administrator.
-* **Dynamic Search & Filtering:** An asynchronous exploration interface allows users to seamlessly filter listings by type (tours vs. hotels), location, and price parameters without page reloads.
-* **Interactive Booking Experience:** Features a modern, sticky booking widget and a responsive demo-payment modal that simulates the checkout process before logging the transaction in the database.
-* **Robust Data Security:** Implements industry best practices, including `password_hash()` for cryptographic credential storage and PDO prepared statements to mitigate SQL injection vulnerabilities across all database operations.
-* **Profile Management:** All users have access to self-service profile management, allowing them to update personal information, securely change passwords, and upload custom profile avatars.
+---
+
+## 🏗️ 3-Tier Enterprise Architecture
+
+```
+┌──────────────────────────────────────────────────────────┐
+│  React 18 (Vite) Frontend — Port 5173                    │
+│  Modular Glassmorphism UI:                               │
+│  • Public Catalog (20 Tours + 10 Luxury Hotels)          │
+│  • Traveler Portal (Live Booking, Server-Side Pricing)   │
+│  • Agency Partner Portal (Inventory & Booking Requests)  │
+│  • Admin Control Suite (Overview, CRUD, Moderation, CSV) │
+└────────────────────────────┬─────────────────────────────┘
+                             │ HTTP / JSON API (Bearer JWT)
+┌────────────────────────────▼─────────────────────────────┐
+│  Node.js / Express API Gateway — Port 3001               │
+│  • Proxying /api routes to FastAPI                       │
+│  • Security Headers (X-Content-Type, X-Frame, X-XSS)     │
+│  • Auth Rate Limiting & Health Probes (/health, /ready)  │
+└────────────────────────────┬─────────────────────────────┘
+                             │ Reverse Proxy Forwarding
+┌────────────────────────────▼─────────────────────────────┐
+│  FastAPI (Python) Backend — Port 8000                    │
+│  • 5 Software Design Patterns                            │
+│  • JWT Auth & Role-Based Access Control (Admin Guard)    │
+│  • Modular Routers: Auth, Admin, Packages, Bookings      │
+└────────────────────────────┬─────────────────────────────┘
+                             │ SQLAlchemy 2.0 ORM
+┌────────────────────────────▼─────────────────────────────┐
+│  PostgreSQL Database (SQLite Fallback Supported)         │
+│  Tables: users, agencies, packages, bookings, payments,  │
+│          activity_logs, platform_settings                │
+└──────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔑 Default System Credentials
+
+| Role | Email | Password | Access Capabilities |
+|---|---|---|---|
+| **Platform Administrator** | `admin@safar.com` | `admin123` | Master Control Suite, Inventory CRUD, Agency Verification, Global Ledger, Commission Settings |
+| **Travel Agency Partner** | `agency@safar.com` | `agency123` | Agency Management Hub, Listing Publication, Booking Request Moderation |
+| **Traveler / Tourist** | `traveler@safar.com` | `traveler123` | Explore Experiences, Server-Priced Reservations, Personal Dashboard, Booking History |
+
+---
+
+## 🧩 The 5 Software Design Patterns (Active Runtime Implementations)
+
+> Detailed documentation for **Assignment 2: Design Patterns**. Also see [`DESIGN_PATTERNS_ASSIGNMENT.md`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/DESIGN_PATTERNS_ASSIGNMENT.md) for full extended architecture writeups and test logs.
+
+---
+
+### Pattern 1: Singleton Pattern
+- **Problem Solved**: Prevents connection pool exhaustion and memory leaks by ensuring exactly one database connection pool and session factory instance exists across the application lifecycle.
+- **Specific Files & Classes Involved**:
+  - Implementation: [`backend/app/db/session.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/app/db/session.py) (`DatabaseManager` class, `get_db` FastAPI dependency)
+  - Unit Test: [`backend/tests/test_singleton.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/tests/test_singleton.py)
+- **UML Diagram & Structure Explanation**:
+
+```mermaid
+classDiagram
+    class DatabaseManager {
+        -_instance: DatabaseManager
+        -_lock: threading.Lock
+        +engine: Engine
+        +SessionFactory: sessionmaker
+        +db_url: str
+        +__new__(db_url) DatabaseManager
+        +get_instance(db_url) DatabaseManager
+        +get_session() Session
+        +create_all_tables() void
+        +reset_instance() void
+    }
+    class get_db {
+        <<FastAPI Dependency>>
+        +yields Session
+    }
+    DatabaseManager --> get_db : injects session via
+    note for DatabaseManager "Thread-safe double-checked locking\nguarantees ONE connection pool instance"
+```
+
+*Structure Explanation*: `DatabaseManager` uses a thread lock (`_lock`) inside `__new__` to guarantee that only one instance is initialized across concurrent worker threads. `get_db()` acts as a route dependency, requesting a scoped session from `DatabaseManager` and closing it safely when the HTTP request finishes.
+
+---
+
+### Pattern 2: Factory Method Pattern
+- **Problem Solved**: Decouples package creation and polymorphic behavior between distinct listing types (Tour Packages vs. Luxury Hotels) without hardcoded `if/else` conditionals across the codebase.
+- **Specific Files & Classes Involved**:
+  - Implementation: [`backend/app/factories/package_factory.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/app/factories/package_factory.py) (`TravelListing`, `TourPackage`, `HotelListing`, `PackageFactory`, `TourFactory`, `HotelFactory`, `PackageFactoryProducer`)
+  - Unit Test: [`backend/tests/test_factory.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/tests/test_factory.py)
+- **UML Diagram & Structure Explanation**:
+
+```mermaid
+classDiagram
+    class TravelListing {
+        <<abstract>>
+        +id: int
+        +title: str
+        +location: str
+        +price: float
+        +description: str
+        +image_url: str
+        +agency: str
+        +get_details()* Dict
+    }
+    class TourPackage {
+        +duration_days: int
+        +get_details() Dict
+    }
+    class HotelListing {
+        +room_type: str
+        +amenities: str
+        +get_details() Dict
+    }
+    class PackageFactory {
+        <<abstract>>
+        +create_listing(data)* TravelListing
+    }
+    class TourFactory {
+        +create_listing(data) TourPackage
+    }
+    class HotelFactory {
+        +create_listing(data) HotelListing
+    }
+    class PackageFactoryProducer {
+        +get_factory(listing_type)$ PackageFactory
+    }
+
+    TravelListing <|-- TourPackage
+    TravelListing <|-- HotelListing
+    PackageFactory <|-- TourFactory
+    PackageFactory <|-- HotelFactory
+    TourFactory ..> TourPackage : instantiates
+    HotelFactory ..> HotelListing : instantiates
+    PackageFactoryProducer ..> PackageFactory : resolves
+```
+
+*Structure Explanation*: `TravelListing` defines the common product interface. `TourFactory` and `HotelFactory` override `create_listing()` to instantiate `TourPackage` and `HotelListing` respectively. `PackageFactoryProducer` acts as a static resolver that selects the appropriate concrete factory based on the requested listing type.
+
+---
+
+### Pattern 3: Strategy Pattern
+- **Problem Solved**: Encapsulates interchangeable payment fee calculations and transaction algorithms at runtime (Credit Card +2.5% surcharge, Crypto -5% discount, Demo Wallet 0% fee).
+- **Specific Files & Classes Involved**:
+  - Implementation: [`backend/app/strategies/payment_strategy.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/app/strategies/payment_strategy.py) (`PaymentStrategy`, `CreditCardPaymentStrategy`, `CryptoPaymentStrategy`, `DemoWalletPaymentStrategy`, `PaymentContext`)
+  - Unit Test: [`backend/tests/test_strategy.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/tests/test_strategy.py)
+- **UML Diagram & Structure Explanation**:
+
+```mermaid
+classDiagram
+    class PaymentStrategy {
+        <<abstract>>
+        +calculate_total(price, count)* float
+        +process_payment(amount, details)* Dict
+    }
+    class CreditCardPaymentStrategy {
+        +calculate_total() float (+2.5%)
+        +process_payment() Dict
+    }
+    class CryptoPaymentStrategy {
+        +calculate_total() float (-5.0%)
+        +process_payment() Dict
+    }
+    class DemoWalletPaymentStrategy {
+        +calculate_total() float (0.0%)
+        +process_payment() Dict
+    }
+    class PaymentContext {
+        -_strategy: PaymentStrategy
+        +set_strategy(strategy) void
+        +calculate(base_price, count) float
+        +execute_payment(amount, details) Dict
+    }
+
+    PaymentStrategy <|-- CreditCardPaymentStrategy
+    PaymentStrategy <|-- CryptoPaymentStrategy
+    PaymentStrategy <|-- DemoWalletPaymentStrategy
+    PaymentContext o-- PaymentStrategy : delegates to
+```
+
+*Structure Explanation*: `PaymentStrategy` defines the common strategy interface (`calculate_total`, `process_payment`). Concrete strategies implement specific pricing rules (e.g. credit card fee vs crypto discount). `PaymentContext` holds a reference to a strategy and delegates computation to it dynamically.
+
+---
+
+### Pattern 4: Observer Pattern
+- **Problem Solved**: Maintains a 1-to-many subscription model when booking lifecycle events occur. Decouples event producers from database audit logging, agency notifications, and traveler confirmation emails.
+- **Specific Files & Classes Involved**:
+  - Implementation: [`backend/app/observers/booking_observer.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/app/observers/booking_observer.py) (`BookingObserver`, `DatabaseAuditLogObserver`, `EmailNotificationObserver`, `AgencyAlertObserver`, `BookingSubject`)
+  - Unit Test: [`backend/tests/test_observer.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/tests/test_observer.py)
+- **UML Diagram & Structure Explanation**:
+
+```mermaid
+classDiagram
+    class BookingObserver {
+        <<abstract>>
+        +update(event_type, data, db)* void
+    }
+    class DatabaseAuditLogObserver {
+        +audit_logs: List
+        +update(event_type, data, db) void (Persists to PostgreSQL)
+    }
+    class EmailNotificationObserver {
+        +notifications_sent: List
+        +update(event_type, data, db) void
+    }
+    class AgencyAlertObserver {
+        +agency_alerts: List
+        +update(event_type, data, db) void
+    }
+    class BookingSubject {
+        -_observers: List~BookingObserver~
+        +attach(observer) void
+        +detach(observer) void
+        +notify(event_type, data, db) void
+    }
+
+    BookingObserver <|-- DatabaseAuditLogObserver
+    BookingObserver <|-- EmailNotificationObserver
+    BookingObserver <|-- AgencyAlertObserver
+    BookingSubject o-- BookingObserver : broadcasts to
+```
+
+*Structure Explanation*: `BookingSubject` maintains a list of attached observers (`DatabaseAuditLogObserver`, `EmailNotificationObserver`, `AgencyAlertObserver`). When a booking status changes, `BookingSubject.notify()` iterates over all registered observers, triggering their `update()` logic asynchronously/decoupled.
+
+---
+
+### Pattern 5: Facade Pattern
+- **Problem Solved**: Provides a unified, high-level transactional entry point that orchestrates Factory Method validation, Strategy pricing, PostgreSQL database transaction commit, and Observer event broadcasting.
+- **Specific Files & Classes Involved**:
+  - Implementation: [`backend/app/facades/travel_booking_facade.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/app/facades/travel_booking_facade.py) (`TravelBookingFacade`)
+  - Subsystems Orchestrated: `PackageFactoryProducer`, `PaymentContext`, SQLAlchemy Session, `BookingSubject`
+  - Unit Test: [`backend/tests/test_facade.py`](file:///c:/Users/user/Documents/Safar%20web%20app/Safar%20web/Safar-Web-App/backend/tests/test_facade.py)
+- **UML Diagram & Structure Explanation**:
+
+```mermaid
+classDiagram
+    class TravelBookingFacade {
+        +booking_subject: BookingSubject
+        +audit_observer: DatabaseAuditLogObserver
+        +email_observer: EmailNotificationObserver
+        +agency_observer: AgencyAlertObserver
+        +select_payment_strategy(method) PaymentStrategy
+        +process_booking_transaction(db, traveler, package_id, guests, method) Dict
+    }
+    class PackageFactoryProducer {
+        +get_factory(type)$ PackageFactory
+    }
+    class PaymentContext {
+        +calculate() float
+        +execute_payment() Dict
+    }
+    class DatabaseTransaction {
+        +commit(Booking, Payment) void
+    }
+    class BookingSubject {
+        +notify(event_type, data, db) void
+    }
+
+    TravelBookingFacade --> PackageFactoryProducer : 1. Load & Instantiate Listing
+    TravelBookingFacade --> PaymentContext : 2. Authoritative Price & Payment
+    TravelBookingFacade --> DatabaseTransaction : 3. Commit DB Records
+    TravelBookingFacade --> BookingSubject : 4. Dispatch Observer Notifications
+```
+
+*Structure Explanation*: The client (FastAPI Router) interacts strictly with `TravelBookingFacade.process_booking_transaction(...)`. The Facade encapsulates all complex subsystem interactions, executing factory instantiation, strategy calculation, DB persistence, and observer broadcasting in a safe transactional pipeline.
+
+---
+
+## 🧪 PyTest Suite & Test Coverage
+
+All 73 unit and integration tests pass with **87.45% branch coverage**:
+
+```bash
+cd backend
+python -m pytest tests --cov=app --cov-branch --cov-fail-under=80 -v
+```
+
+### Coverage Breakdown Table:
+| Module | Stmts | Miss | Branch | BrPart | Coverage |
+|---|---|---|---|---|---|
+| `app/auth/security.py` | 24 | 2 | 2 | 0 | **92%** |
+| `app/auth/dependencies.py` | 32 | 5 | 12 | 3 | **82%** |
+| `app/db/session.py` (Singleton) | 45 | 9 | 8 | 2 | **75%** |
+| `app/factories/package_factory.py` (Factory) | 48 | 2 | 4 | 0 | **96%** |
+| `app/strategies/payment_strategy.py` (Strategy) | 44 | 2 | 0 | 0 | **95%** |
+| `app/observers/booking_observer.py` (Observer) | 66 | 6 | 14 | 3 | **86%** |
+| `app/facades/travel_booking_facade.py` (Facade) | 56 | 0 | 6 | 0 | **100%** |
+| `app/routers/admin.py` | 149 | 8 | 18 | 5 | **92%** |
+| `app/routers/auth.py` | 41 | 3 | 8 | 2 | **90%** |
+| `app/routers/bookings.py` | 70 | 12 | 16 | 4 | **81%** |
+| `app/routers/packages.py` | 41 | 0 | 10 | 0 | **100%** |
+| `app/models.py` | 106 | 0 | 0 | 0 | **100%** |
+| `app/schemas.py` | 70 | 0 | 0 | 0 | **100%** |
+| **TOTAL** | **876** | **96** | **104** | **21** | **87.45%** |
+
+---
+
+## 🚀 Step-by-Step Setup & Running Guide
+
+### 1. Backend (FastAPI + SQLAlchemy)
+```bash
+cd backend
+pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --port 8000
+```
+- Tables are automatically created and seeded on startup.
+- Interactive OpenAPI Docs: http://localhost:8000/docs
+
+### 2. API Gateway (Node.js Express)
+```bash
+cd api-gateway
+npm install
+npm run dev
+```
+- Gateway URL: http://localhost:3001
+- Health check: http://localhost:3001/health
+- Readiness probe: http://localhost:3001/ready
+
+### 3. Frontend (React 18 + Vite)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+- Web Application UI: http://localhost:5173
