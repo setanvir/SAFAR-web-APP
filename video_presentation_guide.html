@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAFAR — Video Presentation & Oral Defense Script</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0B1120;
+      --surface: #1E293B;
+      --surface-border: rgba(255, 255, 255, 0.08);
+      --primary: #38BDF8;
+      --primary-glow: rgba(56, 189, 248, 0.2);
+      --accent: #818CF8;
+      --success: #34D399;
+      --warning: #FBBF24;
+      --text: #F1F5F9;
+      --text-muted: #94A3B8;
+      --card-bg: rgba(30, 41, 59, 0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(129, 140, 248, 0.15));
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      padding: 35px 30px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #FFFFFF, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 15px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .meta-item strong {
+      color: var(--text);
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .section-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .time-tag {
+      background: rgba(255,255,255,0.06);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .screen-action {
+      background: rgba(52, 211, 153, 0.1);
+      border-left: 4px solid var(--success);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      color: #A7F3D0;
+    }
+
+    .screen-action strong {
+      color: var(--success);
+    }
+
+    .speech-box {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 12px;
+      font-size: 1.02rem;
+      color: #E2E8F0;
+      line-height: 1.7;
+    }
+
+    .speech-box p {
+      margin-bottom: 12px;
+    }
+
+    .speech-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .key-points {
+      list-style: none;
+      margin: 15px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .key-points li {
+      background: rgba(255,255,255,0.03);
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--surface-border);
+      font-size: 0.95rem;
+    }
+
+    .key-points li strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0,0,0,0.4);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: #38BDF8;
+    }
+
+    .progress-sticky {
+      position: sticky;
+      bottom: 20px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 14px;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <header>
+      <div class="badge">Oral Defense & Video Guide</div>
+      <h1>SAFAR — Project Presentation Script</h1>
+      <p style="color: var(--text-muted); font-size: 1.05rem;">Complete step-by-step oral demonstration guide covering Architecture, 5 GoF Design Patterns, and PyTest Testing Suite.</p>
+      
+      <div class="meta-bar">
+        <div class="meta-item">⏱️ <strong>Target Duration:</strong> 5 – 7 Minutes</div>
+        <div class="meta-item">🌐 <strong>Tech Stack:</strong> React 18 + Node.js Gateway + FastAPI + PostgreSQL</div>
+        <div class="meta-item">🔗 <strong>GitHub:</strong> <span class="code-pill">github.com/setanvir/SAFAR-web-APP</span></div>
+      </div>
+    </header>
+
+    <!-- SECTION 1 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span>1️⃣ Introduction & Architecture Overview</span>
+        </div>
+        <span class="time-tag">0:00 – 1:00</span>
+      </div>
+
+      <div class="screen-action">
+        🖥️ <strong>Screen Demo:</strong> Show the SAFAR Homepage (<span class="code-pill">http://localhost:5173</span>) and the 3-Tier Architecture Diagram in <span class="code-pill">README.md</span>.
+      </div>
+
+      <div class="speech-box">
+        <p><strong>Spoken Script:</strong></p>
+        <p>“Hello everyone and honorable faculty! Today, I am presenting <strong>SAFAR</strong>, an enterprise-grade Travel and Holiday Marketplace web application.</p>
+        <p>SAFAR is built with a modern <strong>3-tier decoupled architecture</strong>:</p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+          <li><strong>Frontend:</strong> React 18 with Vite and dynamic glassmorphism UI.</li>
+          <li><strong>API Gateway:</strong> Node.js Express acting as a secure reverse proxy with rate limiting and security headers.</li>
+          <li><strong>Backend Core:</strong> Python FastAPI utilizing SQLAlchemy ORM with PostgreSQL database persistence.</li>
+        </ul>
+        <p>It supports 3 distinct user roles: <strong>Platform Administrator</strong>, <strong>Travel Agency Partners</strong>, and <strong>Travelers</strong>.”</p>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span>2️⃣ Core Feature Walkthrough & Roles</span>
+        </div>
+        <span class="time-tag">1:00 – 2:30</span>
+      </div>
+
+      <div class="screen-action">
+        🖥️ <strong>Screen Demo:</strong> Log into Traveler account, filter Tour Packages/Hotels, switch to Admin Control Suite (<span class="code-pill">admin@safar.com</span>), and show live management dashboard.
+      </div>
+
+      <div class="speech-box">
+        <p><strong>Spoken Script:</strong></p>
+        <p>“Let's quickly walk through the application flow:</p>
+        <p>1. <strong>Traveler Experience:</strong> Users can browse 20+ curated holiday packages and luxury hotels, view interactive itineraries, and complete real-time bookings with instantaneous server-side pricing calculations.</p>
+        <p>2. <strong>Admin Master Suite:</strong> Administrators have a comprehensive portal for inventory CRUD, agency verification, platform commission rate configuration, and global revenue analytics.”</p>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span>3️⃣ 5 Software Design Patterns (Assignment 2)</span>
+        </div>
+        <span class="time-tag">2:30 – 4:30</span>
+      </div>
+
+      <div class="screen-action">
+        🖥️ <strong>Screen Demo:</strong> Open <span class="code-pill">DESIGN_PATTERNS_ASSIGNMENT(ID_232_134_001).md</span> on VS Code and show the code files in <span class="code-pill">backend/app/</span>.
+      </div>
+
+      <ul class="key-points">
+        <li>
+          <strong>1. Singleton Pattern</strong>
+          <span class="code-pill">backend/app/db/session.py</span>
+          Guarantees thread-safe connection pooling and prevents DB exhaustion.
+        </li>
+        <li>
+          <strong>2. Factory Method Pattern</strong>
+          <span class="code-pill">backend/app/factories/package_factory.py</span>
+          Polymorphic creation between Tour Packages and Luxury Hotels without hardcoded if/else.
+        </li>
+        <li>
+          <strong>3. Strategy Pattern</strong>
+          <span class="code-pill">backend/app/strategies/payment_strategy.py</span>
+          Interchangeable pricing algorithms (Credit Card +2.5%, Crypto -5%, Demo Wallet 0%).
+        </li>
+        <li>
+          <strong>4. Observer Pattern</strong>
+          <span class="code-pill">backend/app/observers/booking_observer.py</span>
+          Event-driven decoupled system for DB audit logs, customer emails, and agency alerts.
+        </li>
+        <li>
+          <strong>5. Facade Pattern</strong>
+          <span class="code-pill">backend/app/facades/travel_booking_facade.py</span>
+          Unified transactional pipeline orchestrating Factory, Strategy, DB commit, and Observers.
+        </li>
+      </ul>
+
+      <div class="speech-box">
+        <p><strong>Spoken Script:</strong></p>
+        <p>“For our Software Architecture requirements, we have implemented 5 Gang of Four design patterns:</p>
+        <p>First, the <strong>Singleton Pattern</strong> in our database manager uses double-checked locking to ensure only one connection pool instance is created across threads.</p>
+        <p>Second, the <strong>Factory Method</strong> decouples package instantiation so the system seamlessly supports polymorphic listing types.</p>
+        <p>Third, the <strong>Strategy Pattern</strong> handles dynamic pricing algorithms at runtime.</p>
+        <p>Fourth, the <strong>Observer Pattern</strong> broadcasts booking lifecycle events to audit logging, email notifications, and agency alerts.</p>
+        <p>Finally, the <strong>Facade Pattern</strong> provides a unified transactional entry point that coordinates all four subsystems in a single atomic transaction.”</p>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span>4️⃣ Software Testing & Code Coverage (Assignment 3)</span>
+        </div>
+        <span class="time-tag">4:30 – 5:45</span>
+      </div>
+
+      <div class="screen-action">
+        🖥️ <strong>Screen Demo:</strong> Open terminal in <span class="code-pill">backend/</span> and run: <br>
+        <span class="code-pill">python -m pytest tests --cov=app --cov-branch --cov-report=term-missing</span>
+      </div>
+
+      <div class="speech-box">
+        <p><strong>Spoken Script:</strong></p>
+        <p>“Now turning to Software Testing: our backend is backed by an automated <strong>PyTest suite</strong>.</p>
+        <p>We achieved <strong>73 passed tests with 87% overall branch coverage</strong>, comfortably surpassing the 50% university requirement.</p>
+        <p>All units are tested in complete isolation using <strong>mocking and stubbing</strong> via <span class="code-pill">unittest.mock</span> and FastAPI dependency overrides, guaranteeing zero external dependencies during unit execution.”</p>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span>5️⃣ Conclusion & Submission Links</span>
+        </div>
+        <span class="time-tag">5:45 – 6:15</span>
+      </div>
+
+      <div class="screen-action">
+        🖥️ <strong>Screen Demo:</strong> Show the GitHub repository page (<span class="code-pill">https://github.com/setanvir/SAFAR-web-APP</span>).
+      </div>
+
+      <div class="speech-box">
+        <p><strong>Spoken Script:</strong></p>
+        <p>“In conclusion, SAFAR demonstrates a robust, production-grade architecture combining modern web development, clean GoF design patterns, and rigorous test coverage.</p>
+        <p>The entire source code, unit tests, and design pattern documentation are available on our public GitHub repository at <span class="code-pill">github.com/setanvir/SAFAR-web-APP</span>. Thank you!”</p>
+      </div>
+    </div>
+
+    <!-- FLOATING PROGRESS -->
+    <div class="progress-sticky">
+      <div>
+        <strong style="color: var(--primary);">🎯 Ready to Record</strong>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Keep this page open on side-screen while recording your video!</p>
+      </div>
+      <div style="font-size: 0.9rem; font-weight: 700; color: var(--success);">
+        Total: ~6 Minutes
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
